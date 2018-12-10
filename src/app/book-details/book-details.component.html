@@ -11,20 +11,16 @@
     </div>
     <div class="four wide column">
       <h4>ISBN</h4>
-      {{ book.isbn | isbn:true }}
+      {{ book.isbn }}
     </div>
     <div class="four wide column">
       <h4>Erschienen</h4>
-      {{ book.published | date:'longDate' }}
+      {{ book.published }}
     </div>
     <div class="four wide column">
       <h4>Rating</h4>
-      <ng-container
-        *ngFor="let r of getRating(book.rating);
-                index as i">
-        <i class="yellow star icon"
-          *bmDelay="500 + i * 200"></i>
-      </ng-container>
+      <i class="yellow star icon"
+        *ngFor="let r of getRating(book.rating)" ></i>
     </div>
   </div>
   <h4>Beschreibung</h4>
@@ -37,10 +33,6 @@
           (click)="removeBook()">
     <i class="remove icon"></i> Buch löschen
   </button>
-  <a class="ui tiny yellow labeled icon button"
-    [routerLink]="['../../admin/edit', book.isbn]">
-    <i class="write icon"></i> Buch bearbeiten
-  </a>
 </div>
 
 <ng-template #errorMessage>
