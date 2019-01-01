@@ -11,7 +11,7 @@ import { BookFactory } from './book-factory';
   providedIn: 'root'
 })
 export class BookStoreService {
-  private api = 'https://api3.angular-buch.com/secure';
+  private api = 'https://api3.angular-buch.com';
 
   constructor(private http: HttpClient) {}
 
@@ -36,26 +36,6 @@ export class BookStoreService {
     );
   }
 
-  create(book: Book): Observable<any> {
-    return this.http.post(
-      `${this.api}/book`,
-      book,
-      { responseType: 'text' }
-    ).pipe(
-      catchError(this.errorHandler)
-    );
-  }
-
-  update(book: Book): Observable<any> {
-    return this.http.put(
-      `${this.api}/book/${book.isbn}`,
-      book,
-      { responseType: 'text' }
-    ).pipe(
-      catchError(this.errorHandler)
-    );
-  }
-
   remove(isbn: string): Observable<any> {
     return this.http.delete(
       `${this.api}/book/${isbn}`,
@@ -65,6 +45,7 @@ export class BookStoreService {
     );
   }
 
+  // NEU
   getAllSearch(searchTerm: string): Observable<Book[]> {
     return this.http.get<BookRaw[]>(
       `${this.api}/books/search/${searchTerm}`
@@ -73,14 +54,6 @@ export class BookStoreService {
       map(booksRaw =>
         booksRaw.map(b => BookFactory.fromRaw(b)),
       ),
-      catchError(this.errorHandler)
-    );
-  }
-
-  check(isbn: string): Observable<Boolean> {
-    return this.http.get(
-      `${this.api}/book/${isbn}/check`
-    ).pipe(
       catchError(this.errorHandler)
     );
   }

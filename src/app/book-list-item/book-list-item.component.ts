@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Book } from '../../shared/book';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'bm-book-list-item',
